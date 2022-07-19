@@ -3,6 +3,6 @@
 
 - [ ] Validar GeoIP
 
-- [ ] Configurar Timezone de Usuários
+- [x] Configurar Timezone de Usuários
 
 - [ ] Validar Índices de acordo com a LGPD
