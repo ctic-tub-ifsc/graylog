@@ -1,5 +1,4 @@
-pfsense-graylog/
-config/*
+
 config/etc/graylog/server/GeoLite2-City.mmdb
 config/etc/graylog/server/GeoLite2-ASN.mmdb
-usr/share/graylog/
+config/etc/graylog/server/service-names-port-numbers.csv
