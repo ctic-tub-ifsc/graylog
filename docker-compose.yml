@@ -28,6 +28,7 @@ services:
     # Graylog: https://hub.docker.com/r/graylog/graylog/
     graylog:
       image: graylog/graylog:4.3.3
+      container_name: graylog
       environment:
         - TZ=America/Maceio
         - GRAYLOG_TIMEZONE=America/Maceio
@@ -60,8 +61,31 @@ services:
         - 12201:12201/udp
         # Syslog UDP
         - 5442:5442/udp
-    
+    # ElasticSearch Web Admin Console
+    cerebro:
+      image: lmenezes/cerebro
+      environment:
+        - CEREBRO_PORT=9002
+      depends_on:
+        - elasticsearch
+      ports:
+        - 9002:9002
+      networks:
+        - graylog
+
+    # Grafana Dashboard
+    grafana:
+      image: grafana/grafana-enterprise:8.2.0
+      ports:
+        - 3000:3000
+      user: '104'
+      networks:
+        - graylog
+      depends_on:
+        - elasticsearch
+      environment:
+        - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource,grafana-piechart-panel,grafana-worldmap-panel,savantly-heatmap-panel
+
 networks:
     graylog:
       driver: bridge
-#
